@@ -1,0 +1,22 @@
+{
+  "name": "GDrive Sync",
+  "version": "dev",
+  "slug": "gdrive_sync",
+  "description": "Upload your Hass.io backups to Google Drive",
+  "url": "https://github.com/danielwelch/hassio-gdrive-sync",
+  "startup": "before",
+  "stdin": true,
+  "hassio_api": true,
+  "boot": "auto",
+  "map": ["backup"],
+  "options": {
+    "client_id": "<YOUR_CLIENT_ID>",
+    "client_secret": "<YOUR_CLIENT_SECRET>"
+  },
+  "schema": {
+    "client_id": "str",
+    "client_secret": "str",
+    "folder": "str?"
+  },
+  "image": "dwelch2101/gdrive-sync-{arch}"
+}
