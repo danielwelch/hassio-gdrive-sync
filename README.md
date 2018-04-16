@@ -15,7 +15,7 @@ It requires that you generate a Client Secret and Client ID via the Google API C
 
 ### Usage #TODO
 
-Dropbox Sync uploads all snapshot files (specifically, all `.tar` files) in the Hass.io `/backup` directory to a specified path in your Dropbox. This target path is specified via the `output` option. Once the add-on is started, it is listening for service calls.
+Gdrive Sync uploads all snapshot files (specifically, all `.tar` files) in the Hass.io `/backup` directory to a specified path in your Google Drive. This target path is specified via the `folder` option. Once the add-on is started, it will initiate the authentication flow (see below) and,after that is completed, will listen for service calls.
 
 After the add-on is configured and started, trigger an upload by calling the `hassio.addon_stdin` service with the following service data:
 
@@ -25,7 +25,7 @@ After the add-on is configured and started, trigger an upload by calling the `ha
 
 This triggers the `dropbox_uploader.sh` script with the provided access token. You can use Home Assistant automations or scripts to run uploads at certain time intervals, under certain conditions, etc.
 
-Gdrive Sync will only upload new snapshots to the specified path, and will skip snapshots already in the target Dropbox path.
+Gdrive Sync will only upload new snapshots to the specified path, and will skip snapshots already in the target folder.
 
 *Note*: The hash `7be23ff5` that is prepended to the `gdrive_sync` add-on slug above is required.
 

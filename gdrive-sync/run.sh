@@ -27,7 +27,7 @@ while read -r msg; do
     echo "[Info] Received message with command ${cmd}"
     if [[ $cmd = "upload" ]]; then
         echo "[Info] Uploading all .tar files in /backup"
-        python3 /gdrive_sync.py "$OUTPUT_DIR"
+        python3 /gdrive_sync.py --output "$OUTPUT_DIR"
     else
         # received undefined command
         echo "[Error] Command not found: ${cmd}"

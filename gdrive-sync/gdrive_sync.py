@@ -1,3 +1,4 @@
+import argparse
 from pathlib import Path
 
 from pydrive.auth import GoogleAuth
@@ -53,11 +54,10 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(
         description='Run the Gdrive Sync file uploader.')
     parser.add_argument(
-        'client_id', type=str, help='Client ID from the Google API Console')
-    parser.add_argument(
-        'client_secret',
+        '--output',
         type=str,
-        help='Client Secret from the Google API Console')
+        required=False,
+        help='output directory for uploaded files'),
     parser.add_argument(
         '--auth',
         dest='auth',
@@ -69,4 +69,4 @@ if __name__ == "__main__":
         gauth = GoogleAuth()
         gauth.CommandLineAuth()
     else:
-        main(args.number)
+        main(args.output)

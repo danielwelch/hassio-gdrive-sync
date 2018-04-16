@@ -12,10 +12,9 @@ RUN apk add --no-cache jq curl python3 python3-dev && \
 # Copy data
 COPY run.sh /
 COPY settings.template /
+COPY save_settings.py /
 COPY gdrive_sync.py /
 RUN ["chmod", "a+x", "/run.sh"]
-# RUN curl "https://raw.githubusercontent.com/andreafabrizi/Dropbox-Uploader/master/dropbox_uploader.sh" -o /dropbox_uploader.sh
-# RUN ["chmod", "a+x", "/dropbox_uploader.sh"]
 WORKDIR /
 
 CMD [ "/run.sh" ]
