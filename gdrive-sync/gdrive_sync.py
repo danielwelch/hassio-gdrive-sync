@@ -3,18 +3,19 @@ from pathlib import Path
 
 from pydrive.auth import GoogleAuth
 from pydrive.drive import GoogleDrive
+from oauth2client.service_account import ServiceAccountCredentials
 
 
-def main(output_dir):
+def main(keyfile, output_dir):
 
     gauth = GoogleAuth()
-    gauth.CommandLineAuth()
-    # at this point, user will need to navigate
-    # to given URL in web browser to authenticate
+    scope = ['https://www.googleapis.com/auth/drive']
+    gauth.credentials = ServiceAccountCredentials.from_json_keyfile_name(
+        keyfile, scope)
 
     drive = GoogleDrive(gauth)
 
-    if output_dir is None:
+    if not output_dir:
         parent_dir_id = 'root'
     else:
         try:
@@ -56,17 +57,14 @@ if __name__ == "__main__":
     parser.add_argument(
         '--output',
         type=str,
-        required=False,
+        required=True,
         help='output directory for uploaded files'),
     parser.add_argument(
-        '--auth',
-        dest='auth',
-        action='store_true',
+        '--keyfile',
+        dest='keyfile',
+        type=str,
+        required=True,
         help='If true, will run the auth flow and exit')
     parser.set_defaults(auth=False)
     args = parser.parse_args()
-    if args.auth:
-        gauth = GoogleAuth()
-        gauth.CommandLineAuth()
-    else:
-        main(args.output)
+    main(args.keyfile, args.output)

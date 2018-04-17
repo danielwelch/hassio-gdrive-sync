@@ -15,7 +15,8 @@ def main(client_id, secret):
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(
         description='Write client id and secret to jinja template.')
-    parser.add_argument('id', type=str, help='Client ID')
-    parser.add_argument('secret', type=str, help='Client secret')
+    parser.add_argument('--clientid', dest='id', type=str, help='Client ID')
+    parser.add_argument(
+        '--secret', dest='secret', type=str, help='Client secret')
     args = parser.parse_args()
     main(args.id, args.secret)

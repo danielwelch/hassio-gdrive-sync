@@ -8,14 +8,12 @@
   "stdin": true,
   "hassio_api": true,
   "boot": "auto",
-  "map": ["backup"],
+  "map": ["backup", "share"],
   "options": {
-    "client_id": "<YOUR_CLIENT_ID>",
-    "client_secret": "<YOUR_CLIENT_SECRET>"
+    "keyfile": "<FILENAME>"
   },
   "schema": {
-    "client_id": "str",
-    "client_secret": "str",
+    "keyfile": "str",
     "folder": "str?"
   },
   "image": "dwelch2101/gdrive-sync-{arch}"
