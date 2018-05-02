@@ -15,11 +15,6 @@ fi
 
 echo "[Info] Files will be uploaded to: ${FOLDER}"
 
-# python3 /save_settings.py --clientid "$CLIENT_ID" --secret "$CLIENT_SECRET"
-
-# echo "[Info] Running authentication flow..."
-# python3 /gdrive_sync.py --auth
-
 echo "[Info] Listening for messages via stdin service call..."
 
 # listen for input
