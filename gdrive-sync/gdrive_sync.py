@@ -6,7 +6,7 @@ from pydrive.drive import GoogleDrive
 from oauth2client.service_account import ServiceAccountCredentials
 
 
-def main(keyfile, output_dir):
+def main(keyfile, output_dir, user):
 
     gauth = GoogleAuth()
     scope = ['https://www.googleapis.com/auth/drive']
@@ -32,6 +32,12 @@ def main(keyfile, output_dir):
                 'application/vnd.google-apps.folder'
             })
             parent_dir.Upload()
+            # set permissions for this folder
+            parent_dir.InsertPermission({
+                'type': 'user',
+                'value': user,
+                'role': 'owner'
+            })
             parent_dir_id = parent_dir.metadata["id"]
         parent_dir_id = parent_dir.metadata["id"]
 
@@ -49,6 +55,11 @@ def main(keyfile, output_dir):
                 'parents': [parent_dir_id]
             })
             file.Upload()
+            file.InsertPermission({
+                'type': 'user',
+                'value': user,
+                'role': 'owner'
+            })
 
 
 if __name__ == "__main__":
@@ -65,6 +76,12 @@ if __name__ == "__main__":
         type=str,
         required=True,
         help='If true, will run the auth flow and exit')
+    parser.add_argument(
+        '--user',
+        dest='user',
+        type=str,
+        required=True,
+        help='User email for google drive')
     parser.set_defaults(auth=False)
     args = parser.parse_args()
-    main(args.keyfile, args.output)
+    main(args.keyfile, args.output, args.user)

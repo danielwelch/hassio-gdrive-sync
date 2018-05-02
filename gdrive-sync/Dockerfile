@@ -6,7 +6,7 @@ ENV LANG C.UTF-8
 
 # Setup base
 RUN apk add --no-cache jq curl python3 python3-dev && \
-    pip3 install PyDrive Jinja2
+    pip3 install PyDrive==1.3.1
 
 
 # Copy data

@@ -6,6 +6,7 @@ CONFIG_PATH=/data/options.json
 # CLIENT_SECRET=$(jq --raw-output ".client_secret" $CONFIG_PATH)
 KEYFILE=$(jq --raw-output ".keyfile" $CONFIG_PATH)
 FOLDER=$(jq --raw-output ".folder" $CONFIG_PATH)
+GDRIVE_USER=$(jq --raw-output ".user" $CONFIG_PATH)
 
 KEYFILE_PATH="/share/${KEYFILE}"
 
@@ -25,7 +26,7 @@ while read -r msg; do
     echo "[Info] Received message with command ${cmd}"
     if [[ $cmd = "upload" ]]; then
         echo "[Info] Uploading all .tar files in /backup"
-        python3 /gdrive_sync.py --output "$OUTPUT_DIR" --keyfile "$KEYFILE_PATH"
+        python3 /gdrive_sync.py --output "$OUTPUT_DIR" --keyfile "$KEYFILE_PATH" --user "$GDRIVE_USER"
     else
         # received undefined command
         echo "[Error] Command not found: ${cmd}"
